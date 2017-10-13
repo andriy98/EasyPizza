@@ -1,0 +1,180 @@
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mdeleted file mode 100644[m
+[1mindex 39fb081..0000000[m
+[1m--- a/.gitignore[m
+[1m+++ /dev/null[m
+[36m@@ -1,9 +0,0 @@[m
+[31m-*.iml[m
+[31m-.gradle[m
+[31m-/local.properties[m
+[31m-/.idea/workspace.xml[m
+[31m-/.idea/libraries[m
+[31m-.DS_Store[m
+[31m-/build[m
+[31m-/captures[m
+[31m-.externalNativeBuild[m
+[1mdiff --git a/.idea/compiler.xml b/.idea/compiler.xml[m
+[1mdeleted file mode 100644[m
+[1mindex 96cc43e..0000000[m
+[1m--- a/.idea/compiler.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,22 +0,0 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="CompilerConfiguration">[m
+[31m-    <resourceExtensions />[m
+[31m-    <wildcardResourcePatterns>[m
+[31m-      <entry name="!?*.java" />[m
+[31m-      <entry name="!?*.form" />[m
+[31m-      <entry name="!?*.class" />[m
+[31m-      <entry name="!?*.groovy" />[m
+[31m-      <entry name="!?*.scala" />[m
+[31m-      <entry name="!?*.flex" />[m
+[31m-      <entry name="!?*.kt" />[m
+[31m-      <entry name="!?*.clj" />[m
+[31m-      <entry name="!?*.aj" />[m
+[31m-    </wildcardResourcePatterns>[m
+[31m-    <annotationProcessing>[m
+[31m-      <profile default="true" name="Default" enabled="false">[m
+[31m-        <processorPath useClasspath="true" />[m
+[31m-      </profile>[m
+[31m-    </annotationProcessing>[m
+[31m-  </component>[m
+[31m-</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/copyright/profiles_settings.xml b/.idea/copyright/profiles_settings.xml[m
+[1mdeleted file mode 100644[m
+[1mindex e7bedf3..0000000[m
+[1m--- a/.idea/copyright/profiles_settings.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,3 +0,0 @@[m
+[31m-<component name="CopyrightManager">[m
+[31m-  <settings default="" />[m
+[31m-</component>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/gradle.xml b/.idea/gradle.xml[m
+[1mdeleted file mode 100644[m
+[1mindex ae5073e..0000000[m
+[1m--- a/.idea/gradle.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,19 +0,0 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="GradleSettings">[m
+[31m-    <option name="linkedExternalProjectsSettings">[m
+[31m-      <GradleProjectSettings>[m
+[31m-        <option name="distributionType" value="DEFAULT_WRAPPED" />[m
+[31m-        <option name="externalProjectPath" value="$PROJECT_DIR$" />[m
+[31m-        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-3.2" />[m
+[31m-        <option name="modules">[m
+[31m-          <set>[m
+[31m-            <option value="$PROJECT_DIR$" />[m
+[31m-            <option value="$PROJECT_DIR$/app" />[m
+[31m-          </set>[m
+[31m-        </option>[m
+[31m-        <option name="resolveModulePerSourceSet" value="false" />[m
+[31m-      </GradleProjectSettings>[m
+[31m-    </option>[m
+[31m-  </component>[m
+[31m-</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/misc.xml b/.idea/misc.xml[m
+[1mdeleted file mode 100644[m
+[1mindex 5d19981..0000000[m
+[1m--- a/.idea/misc.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,46 +0,0 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="EntryPointsManager">[m
+[31m-    <entry_points version="2.0" />[m
+[31m-  </component>[m
+[31m-  <component name="NullableNotNullManager">[m
+[31m-    <option name="myDefaultNullable" value="android.support.annotation.Nullable" />[m
+[31m-    <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />[m
+[31m-    <option name="myNullables">[m
+[31m-      <value>[m
+[31m-        <list size="4">[m
+[31m-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />[m
+[31m-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />[m
+[31m-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />[m
+[31m-          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />[m
+[31m-        </list>[m
+[31m-      </value>[m
+[31m-    </option>[m
+[31m-    <option name="myNotNulls">[m
+[31m-      <value>[m
+[31m-        <list size="4">[m
+[31m-          <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />[m
+[31m-          <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />[m
+[31m-          <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />[m
+[31m-          <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />[m
+[31m-        </list>[m
+[31m-      </value>[m
+[31m-    </option>[m
+[31m-  </component>[m
+[31m-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">[m
+[31m-    <OptionsSetting value="true" id="Add" />[m
+[31m-    <OptionsSetting value="true" id="Remove" />[m
+[31m-    <OptionsSetting value="true" id="Checkout" />[m
+[31m-    <OptionsSetting value="true" id="Update" />[m
+[31m-    <OptionsSetting value="true" id="Status" />[m
+[31m-    <OptionsSetting value="true" id="Edit" />[m
+[31m-    <ConfirmationsSetting value="0" id="Add" />[m
+[31m-    <ConfirmationsSetting value="0" id="Remove" />[m
+[31m-  </component>[m
+[31m-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">[m
+[31m-    <output url="file://$PROJECT_DIR$/build/classes" />[m
+[31m-  </component>[m
+[31m-  <component name="ProjectType">[m
+[31m-    <option name="id" value="Android" />[m
+[31m-  </component>[m
+[31m-</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/modules.xml b/.idea/modules.xml[m
+[1mdeleted file mode 100644[m
+[1mindex 54b7b3f..0000000[m
+[1m--- a/.idea/modules.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,9 +0,0 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="ProjectModuleManager">[m
+[31m-    <modules>[m
+[31m-      <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />[m
+[31m-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />[m
+[31m-    </modules>[m
+[31m-  </component>[m
+[31m-</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml[m
+[1mdeleted file mode 100644[m
+[1mindex 7f68460..0000000[m
+[1m--- a/.idea/runConfigurations.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,12 +0,0 @@[m
+[31m-<?xml version="1.0" encoding="UTF-8"?>[m
+[31m-<project version="4">[m
+[31m-  <component name="RunConfigurationProducerService">[m
+[31m-    <option name="ignoredProducers">[m
+[31m-      <set>[m
+[31m-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.AllInPackageGradleConfigurationProducer" />[m
+[31m-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestClassGradleConfigurationProducer" />[m
+[31m-        <option value="org.jetbrains.plugins.gradle.execution.test.runner.TestMethodGradleConfigurationProducer" />[m
+[31m-      </set>[m
+[31m-    </option>[m
+[31m-  </component>[m
+[31m-</project>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/java/com/example/andrii/myapplication/ListTasks.java b/app/src/main/java/com/example/andrii/myapplication/ListTasks.java[m
+[1mindex e8a5839..e607dd7 100644[m
+[1m--- a/app/src/main/java/com/example/andrii/myapplication/ListTasks.java[m
+[1m+++ b/app/src/main/java/com/example/andrii/myapplication/ListTasks.java[m
+[36m@@ -25,7 +25,6 @@[m [mpublic class ListTasks extends AppCompatActivity {[m
+     protected void onCreate(Bundle savedInstanceState) {[m
+         super.onCreate(savedInstanceState);[m
+         setContentView(R.layout.toovoid);[m
+[31m-        [m
+         main_fragment = new Main_fragment();[m
+         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();[m
+         fragmentTransaction.replace(R.id.container, main_fragment).commit();[m
