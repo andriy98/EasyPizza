@@ -50,6 +50,11 @@ public class Main_fragment extends Fragment {
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                array_descr.clear();
+                array_photo.clear();
+                array_sizes.clear();
+                array_names.clear();
+                array_price.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     final String name = ds.getKey();
                     myRef.child("Pizzas").child(ds.getKey()).addValueEventListener(new ValueEventListener() {
@@ -59,11 +64,11 @@ public class Main_fragment extends Fragment {
                             };
                             data = (Map<String, String>) dataSnapshot.getValue();
                             array_descr.add(data.get("Опис:"));
-                            array_sizes.add(data.get("Розміри"));
+                            array_sizes.add(data.get("Розміри:"));
                             array_price.add(data.get("Ціна"));
                             array_photo.add(data.get("Фото"));
                             array_names.add(name);
-                            CustomListAdapter adapter = new CustomListAdapter(getContext(),array_names, array_sizes,array_price,array_photo);
+                            CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo);
                             listView.setAdapter(adapter);
                         }
                         @Override
