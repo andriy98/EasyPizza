@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
-public class ListTasks extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private Main_fragment main_fragment;
 
     @Override

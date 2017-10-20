@@ -23,7 +23,7 @@ public class Details_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
         TextView textDesc = (TextView) view.findViewById(R.id.text_desc1);
-        TextView textSize = (TextView) view.findViewById(R.id.text_size1);
+        TextView textSize = (TextView) view.findViewById(R.id.spinner_size);
         TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
         TextView textName = (TextView) view.findViewById(R.id.item);
 
