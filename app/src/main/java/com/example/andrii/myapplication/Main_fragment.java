@@ -3,6 +3,7 @@ package com.example.andrii.myapplication;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,15 @@ public class Main_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
         listView = (ListView) view.findViewById(R.id.discr_for_task);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         myRef = FirebaseDatabase.getInstance().getReference();
+        getPizzas();
+        return view;
+    }
+
+
+    public void getPizzas(){
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Pizzas");
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
@@ -83,6 +92,11 @@ public class Main_fragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {}
         };
         ref.addListenerForSingleValueEvent(eventListener);
-        return view;
+
+
+
     }
+
+
+
 }

@@ -41,7 +41,7 @@ public class Order_fragment extends Fragment {
         final Spinner spinner_size = (Spinner) view.findViewById(R.id.spinner_size);
         final Spinner spinner_city = (Spinner) view.findViewById(R.id.spinner_city);
         final TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
-        TextView textName = (TextView) view.findViewById(R.id.item);
+        final TextView textName = (TextView) view.findViewById(R.id.item);
         button_book = (Button) view.findViewById(R.id.button_book);
         ImageView imageView = (ImageView) view.findViewById(R.id.image_photo);
         final Bundle bundle = getArguments();
@@ -74,7 +74,7 @@ public class Order_fragment extends Fragment {
             }
         });
 
-        
+
 
 
 
@@ -91,6 +91,9 @@ public class Order_fragment extends Fragment {
                             bundle.getString("Name") + "\nРозмір:  " + spinner_size.getSelectedItem().toString() + "\nЦіна:  " +
                             textPrice.getText() + "\nІм’я:  " + textFName.getText() + "\nМісто:  " + spinner_city.getSelectedItem().toString() +
                             "\nАдреса:  " + textAddress.getText() + "\nТелефон:  " + textPhone.getText()).execute();
+                    textFName.setText("");
+                    textAddress.setText("");
+                    textPhone.setText("");
                 }else {
                     Toast.makeText(getContext(),"Заповніть всі поля правильно!", Toast.LENGTH_LONG).show();
                 }

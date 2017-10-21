@@ -43,7 +43,7 @@ class StartAsykcTask extends AsyncTask<Void,Void,Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //Showing progress dialog while sending email
-        progressDialog = ProgressDialog.show(context,"Sending message","Please wait...",false,false);
+        progressDialog = ProgressDialog.show(context,"Відправлення замовлення","Зачекайте, будь ласка...",false,false);
     }
 
     @Override
@@ -53,6 +53,7 @@ class StartAsykcTask extends AsyncTask<Void,Void,Void> {
         progressDialog.dismiss();
         //Showing a success message
         Toast.makeText(context,"Message Sent",Toast.LENGTH_LONG).show();
+
     }
 
     @Override
