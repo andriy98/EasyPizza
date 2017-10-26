@@ -26,9 +26,11 @@ public class Order_fragment extends Fragment {
     private View view;
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapter_city;
+    private ArrayAdapter<String> adapter_numb;
     private String [] sizes;
     private String [] prices;
     private String [] cities = {"Стебник", "Трускавець", "Дрогобич"};
+    private String [] numbers = {"1","2","3","4","5","6","7","8","9","10"};
     private Button button_book;
     @Nullable
     @Override
@@ -40,6 +42,7 @@ public class Order_fragment extends Fragment {
         final EditText textFName = (EditText) view.findViewById(R.id.edit_name);
         final Spinner spinner_size = (Spinner) view.findViewById(R.id.spinner_size);
         final Spinner spinner_city = (Spinner) view.findViewById(R.id.spinner_city);
+        final Spinner spinner_numb = (Spinner) view.findViewById(R.id.spinner_numb);
         final TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
         final TextView textName = (TextView) view.findViewById(R.id.item);
         button_book = (Button) view.findViewById(R.id.button_book);
@@ -48,8 +51,11 @@ public class Order_fragment extends Fragment {
         sizes = bundle.getString("Size").split("/");
         prices = bundle.getString("Price").split("/");
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sizes);
+        adapter_numb = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, numbers);
         adapter_city = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cities);
-
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter_numb.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter_city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
 
@@ -61,6 +67,7 @@ public class Order_fragment extends Fragment {
 
         textDesc.setText(bundle.getString("Desc"));
         spinner_city.setAdapter(adapter_city);
+        spinner_numb.setAdapter(adapter_numb);
         spinner_size.setAdapter(adapter);
         spinner_size.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override

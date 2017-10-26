@@ -52,7 +52,7 @@ class StartAsykcTask extends AsyncTask<Void,Void,Void> {
         //Dismissing the progress dialog
         progressDialog.dismiss();
         //Showing a success message
-        Toast.makeText(context,"Message Sent",Toast.LENGTH_LONG).show();
+        Toast.makeText(context,"Дякуємо за ваше замовлення !",Toast.LENGTH_LONG).show();
 
     }
 

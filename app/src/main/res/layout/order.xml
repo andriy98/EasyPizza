@@ -67,15 +67,38 @@
             <Spinner
                 android:id="@+id/spinner_size"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:dropDownWidth="match_parent"
+                android:spinnerMode="dialog"
+
+
+                android:textSize="30sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            >
+
+            <TextView
+                android:id="@+id/text_тгьи"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Кількість:"
+                android:textSize="24sp" />
+
+            <Spinner
+                android:id="@+id/spinner_numb"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:dropDownWidth="match_parent"
-                android:textSize="30sp"
+                android:spinnerMode="dialog"
 
 
-                />
+                android:textSize="30sp" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,6 +120,7 @@
                 android:layout_marginLeft="45dp"
                 android:textSize="24sp" />
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -131,7 +155,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="45dp"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,6 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
+                android:spinnerMode="dialog"
                 android:textSize="24sp" />
         </LinearLayout>
 
@@ -174,7 +200,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="вул. "
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -195,7 +222,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:inputType="phone"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="italic" />
         </LinearLayout>
 
         <RelativeLayout
@@ -207,13 +235,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="1">
+
             <Button
+
                 android:id="@+id/button_book"
-                android:text="Підтвердити замовлення"
-                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:stateListAnimator="@animator/animator"
+
+                android:text="Підтвердити замовлення" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            >
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <Button
+
+                android:id="@+id/button_cancel"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:stateListAnimator="@animator/animator"
+
+                android:text="Відміна" />
+
         </RelativeLayout>
         </LinearLayout>
 </ScrollView>

@@ -1,8 +1,11 @@
 package com.example.andrii.myapplication;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +38,7 @@ public class Main_fragment extends Fragment {
     private ArrayList<String> array_names = new ArrayList<>();
     private static final int LAYOUT = R.layout.list_tasks;
     private View view;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onStart() {
@@ -49,6 +54,7 @@ public class Main_fragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         myRef = FirebaseDatabase.getInstance().getReference();
         getPizzas();
+        progressDialog = ProgressDialog.show(getContext(),"Завантаження","Зачекайте, будь ласка...",false,false);
         return view;
     }
 
@@ -79,6 +85,7 @@ public class Main_fragment extends Fragment {
                             array_names.add(name);
                             CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo);
                             listView.setAdapter(adapter);
+                            progressDialog.dismiss();
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
