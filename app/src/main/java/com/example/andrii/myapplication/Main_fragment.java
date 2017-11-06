@@ -75,8 +75,6 @@ public class Main_fragment extends Fragment {
                     myRef.child("Pizzas").child(ds.getKey()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {
-                            };
                             data = (Map<String, String>) dataSnapshot.getValue();
                             array_descr.add(data.get("Опис:"));
                             array_sizes.add(data.get("Розміри:"));

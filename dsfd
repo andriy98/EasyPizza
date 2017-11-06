@@ -1,0 +1,53 @@
+[33mcommit 8cae88874aecfc3e7c7d79d8c5cc8e48b31c8166[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Thu Oct 26 21:13:40 2017 +0300
+
+    Add progressdialog, add color buttons, add spinner_dropdown_item
+
+[33mcommit 76fc706aea0e7734a772d0f15a0c8b5b348779bd[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Sat Oct 21 16:30:07 2017 +0300
+
+    Add Splash_screen
+
+[33mcommit 6de41a65fb771a06b9cd3de2c4ab11fc51da409b[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Sat Oct 21 12:49:39 2017 +0300
+
+    Add feedback (email), modify order_fragment
+
+[33mcommit a759e175e817be038b4a7c41ec379b72fad61695[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Fri Oct 20 22:35:27 2017 +0300
+
+    Add Order_fragment to application, modified many files
+
+[33mcommit 2c83788f7316044fe55303b618290f220dfcf135[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Sun Oct 15 01:21:08 2017 +0300
+
+    Add first working version of Details_fragment, and more
+
+[33mcommit 1b5302d62884b2769a20a9563d1e9b9c123e8a40[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Sat Oct 14 02:07:33 2017 +0300
+
+    Add new variant of mylist_layout, add clean details_fragment
+
+[33mcommit b62c5a2336cc723de97b4eb689d795630456a189[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Thu Oct 5 21:50:14 2017 +0300
+
+    Add .gitignore and modify ListTasks
+
+[33mcommit 593a74993a3a27e0e918efe670b7927387023798[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Thu Oct 5 21:47:55 2017 +0300
+
+    Add .idea/
+
+[33mcommit 455f05f99f7254658f368fb8d2cb5d1534d279ba[m
+Author: Andriy98 <rtdmytryshyn@gmail.com>
+Date:   Thu Oct 5 21:45:55 2017 +0300
+
+    First commit

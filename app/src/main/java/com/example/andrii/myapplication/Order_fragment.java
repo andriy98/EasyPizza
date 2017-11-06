@@ -31,7 +31,7 @@ public class Order_fragment extends Fragment {
     private String [] prices;
     private String [] cities = {"Стебник", "Трускавець", "Дрогобич"};
     private String [] numbers = {"1","2","3","4","5","6","7","8","9","10"};
-    private Button button_book;
+    private Button button_book, button_cancel;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class Order_fragment extends Fragment {
         final TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
         final TextView textName = (TextView) view.findViewById(R.id.item);
         button_book = (Button) view.findViewById(R.id.button_book);
+        button_cancel = (Button) view.findViewById(R.id.button_cancel);
         ImageView imageView = (ImageView) view.findViewById(R.id.image_photo);
         final Bundle bundle = getArguments();
         sizes = bundle.getString("Size").split("/");
@@ -106,7 +107,14 @@ public class Order_fragment extends Fragment {
                 }
             }
         });
-
+        button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getFragmentManager().getBackStackEntryCount() > 0 ){
+                    getFragmentManager().popBackStack();
+                }
+            }
+        });
 
         return view;
     }

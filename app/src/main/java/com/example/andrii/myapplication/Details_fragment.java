@@ -55,7 +55,6 @@ public class Details_fragment extends Fragment {
             public void onClick(View view) {
                 if (getFragmentManager().getBackStackEntryCount() > 0 ){
                     getFragmentManager().popBackStack();
-                } else {
                 }
             }
         });
