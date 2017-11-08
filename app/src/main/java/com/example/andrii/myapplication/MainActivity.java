@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Splash_fragment splash_fragment;
     private Drawable icon;
     private int badgeCount=0 ;
+    public static MenuItem item;
 
     @Override
     public void onBackPressed() {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        item = menu.getItem(0);
         ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), icon,ActionItemBadge.BadgeStyles.RED, badgeCount);
         return super.onCreateOptionsMenu(menu);
     }

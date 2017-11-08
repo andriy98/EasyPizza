@@ -8,6 +8,13 @@
     android:orientation="vertical"
     android:visibility="visible">
 
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,47 +23,70 @@
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textColor="@android:color/holo_green_light"
-            android:textSize="24sp"
-            android:textStyle="italic" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
 
     </RelativeLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1">
-
-        <Button
-            android:id="@+id/button7"
-            style="@style/Widget.AppCompat.Button.Colored"
+        <TextView
+            android:id="@+id/desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:stateListAnimator="@animator/animator"
-            android:text="Замовити"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="1.5dp"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" />
 
 
-            ></Button>
 
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="wrap_content"
+
+        </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="9dp"
+        android:orientation="vertical">
+        <RelativeLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                />
+        <RadioButton
+            android:id="@+id/radio2"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:stateListAnimator="@animator/animator"
-            android:text="Детальніше" />
+            android:layout_width="wrap_content"/>
+        </RadioGroup>
 
-    </RelativeLayout>
+            <at.markushi.ui.CircleButton
+                android:id="@+id/add"
+                android:layout_width="64dip"
+                android:layout_height="64dip"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_basket"
+                app:cb_color="#99CC00" />
+
+            <at.markushi.ui.CircleButton
+                android:id="@+id/delete"
+                android:layout_width="64dip"
+                android:layout_height="64dip"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_delete"
+                android:visibility="invisible"
+                app:cb_color="#99CC00" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
