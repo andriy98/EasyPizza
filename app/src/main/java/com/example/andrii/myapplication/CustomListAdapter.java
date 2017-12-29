@@ -33,6 +33,7 @@ public class CustomListAdapter extends ArrayAdapter {
     private final ArrayList arrayPrice;
     private final ArrayList arrayPhoto;
     private final ArrayList arrayDesc;
+    private final ArrayList array_check;
     private  FragmentTransaction fragmentTransaction;
     private Bundle bundle;
     private RadioButton radio1, radio2;
@@ -40,10 +41,12 @@ public class CustomListAdapter extends ArrayAdapter {
     private MenuItem item;
     private int badgeCount = 0;
 
+    
 
 
 
-    public CustomListAdapter(Context context, ArrayList arrayDesc, ArrayList arrayList, ArrayList arrauSize, ArrayList arrayPrice, ArrayList arrayPhoto) {
+
+    public CustomListAdapter(Context context, ArrayList arrayDesc, ArrayList arrayList, ArrayList arrauSize, ArrayList arrayPrice, ArrayList arrayPhoto, ArrayList<Boolean> array_check) {
         super(context, R.layout.mylist, arrayList);
         this.context =  context;
         this.arrayList = arrayList;
@@ -51,6 +54,7 @@ public class CustomListAdapter extends ArrayAdapter {
         this.arrayPrice = arrayPrice;
         this.arrayPhoto = arrayPhoto;
         this.arrayDesc = arrayDesc;
+        this.array_check = array_check;
     }
 
         public View getView(final int position, View view, ViewGroup parent) {
@@ -150,9 +154,15 @@ public class CustomListAdapter extends ArrayAdapter {
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    badgeCount++;
-                    ActionItemBadge.update(item,badgeCount);
-                    Toast.makeText(getContext(), "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                    if ((Boolean) array_check.get(position)==false) {
+                        badgeCount++;
+                        ActionItemBadge.update(item, badgeCount);
+                        Toast.makeText(getContext(), "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                        array_check.set(position,true);
+                    }else {
+                        Toast.makeText(getContext(), "Піца уже в корзині !", Toast.LENGTH_LONG).show();
+
+                    }
                 }
             });
         radio1.setText((String) arrauSize.get(position));

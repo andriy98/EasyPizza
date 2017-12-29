@@ -33,6 +33,7 @@ public class Main_fragment extends Fragment {
     private ArrayList<String> array_descr = new ArrayList<>();
     private ArrayList<String> array_photo = new ArrayList<>();
     private ArrayList<String> array_price = new ArrayList<>();
+    private ArrayList<Boolean> array_check = new ArrayList<>();
     private Map<String, String> data;
     private ArrayList<String> array_sizes = new ArrayList<>();
     private ArrayList<String> array_names = new ArrayList<>();
@@ -80,8 +81,9 @@ public class Main_fragment extends Fragment {
                             array_sizes.add(data.get("Розміри:"));
                             array_price.add(data.get("Ціна"));
                             array_photo.add(data.get("Фото"));
+                            array_check.add(false);
                             array_names.add(name);
-                            CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo);
+                            CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_check);
                             listView.setAdapter(adapter);
                             progressDialog.dismiss();
                         }
