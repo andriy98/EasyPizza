@@ -1,9 +1,9 @@
 package com.example.andrii.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +28,8 @@ public class Splash_fragment extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.container, main_fragment).commit();
-
+                Intent intent = new Intent(getActivity(), MainActivity_drawer.class);
+                startActivity(intent);
             }
         }, 3*1000);
 

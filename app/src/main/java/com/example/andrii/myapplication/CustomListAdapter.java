@@ -1,14 +1,12 @@
 package com.example.andrii.myapplication;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -21,8 +19,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import at.markushi.ui.CircleButton;
-
-import static android.R.attr.data;
 
 public class CustomListAdapter extends ArrayAdapter {
     private Context context;
@@ -64,7 +60,7 @@ public class CustomListAdapter extends ArrayAdapter {
         order_fragment = new Order_fragment();
        // Button but_details = (Button) rowView.findViewById(R.id.button8);
         RadioGroup radioGroup = (RadioGroup) rowView.findViewById(R.id.radioGroup);
-            item = MainActivity.item;
+            item = MainActivity_drawer.item;
         radio1 = (RadioButton) rowView.findViewById(R.id.radio1);
         radio2 = (RadioButton) rowView.findViewById(R.id.radio2);
         radio1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -161,7 +157,6 @@ public class CustomListAdapter extends ArrayAdapter {
                         array_check.set(position,true);
                     }else {
                         Toast.makeText(getContext(), "Піца уже в корзині !", Toast.LENGTH_LONG).show();
-
                     }
                 }
             });

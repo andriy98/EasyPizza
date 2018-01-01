@@ -44,7 +44,7 @@ public class Main_fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().setTitle("Меню");
+        getActivity().setTitle("Піца");
     }
 
     @Nullable

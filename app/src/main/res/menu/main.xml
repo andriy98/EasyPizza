@@ -7,5 +7,5 @@
             android:id="@+id/item_samplebadge"
             app:actionLayout="@layout/menu_action_item_badge"
             app:showAsAction="always"
-            android:title="Item"/>
+            android:title="Корзина"/>
 </menu>
