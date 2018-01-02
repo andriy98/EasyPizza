@@ -54,6 +54,7 @@ public class Main_fragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.discr_for_task);
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         myRef = FirebaseDatabase.getInstance().getReference();
+
         getPizzas();
         progressDialog = ProgressDialog.show(getContext(),"Завантаження","Зачекайте, будь ласка...",false,false);
         return view;
@@ -61,7 +62,6 @@ public class Main_fragment extends Fragment {
 
 
     public void getPizzas(){
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Pizzas");
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
