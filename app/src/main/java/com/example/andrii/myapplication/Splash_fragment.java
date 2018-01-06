@@ -1,6 +1,7 @@
 package com.example.andrii.myapplication;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.os.Handler;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class Splash_fragment extends Fragment {
     private static final int LAYOUT = R.layout.splash_screen;
     private View view;
     private Main_fragment main_fragment;
+    private DataBaseHelper myDB;
 
 
     @Nullable
@@ -22,6 +27,8 @@ public class Splash_fragment extends Fragment {
         view = inflater.inflate(LAYOUT, container, false);
         main_fragment = new Main_fragment();
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        myDB = new DataBaseHelper(getContext());
+        myDB.removeAll();
 
 
 
@@ -41,4 +48,8 @@ public class Splash_fragment extends Fragment {
 
         return view;
     }
+
+
+
+
 }

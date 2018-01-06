@@ -2,6 +2,7 @@ package com.example.andrii.myapplication;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
+import java.util.ArrayList;
+
 
 public class MainActivity_drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,8 +29,7 @@ public class MainActivity_drawer extends AppCompatActivity
     private Delivery_fragment delivery_fragment;
     private Drawable icon;
     public static MenuItem item;
-    private int badgeCount=0;
-
+    public int badgeCount=0;
 
 
 
