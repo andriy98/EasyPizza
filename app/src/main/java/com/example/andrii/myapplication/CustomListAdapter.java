@@ -1,6 +1,9 @@
 package com.example.andrii.myapplication;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import at.markushi.ui.CircleButton;
 
@@ -25,24 +29,31 @@ public class CustomListAdapter extends ArrayAdapter {
     private Details_fragment details_fragment;
     private Order_fragment order_fragment;
     private final ArrayList arrayList;
-    private final ArrayList arrauSize;
-    private final ArrayList arrayPrice;
+    private final ArrayList<String> arrauSize;
+    private final ArrayList<String> arrayPrice;
     private final ArrayList arrayPhoto;
     private final ArrayList arrayDesc;
-    private final ArrayList array_check;
+    private final ArrayList<Boolean> array_radio;
+    private final ArrayList<Boolean> array_check;
+    private final ArrayList<Boolean> array_check_second;
     private  FragmentTransaction fragmentTransaction;
     private Bundle bundle;
+    private int a;
     private RadioButton radio1, radio2;
     private CircleButton add, delete;
     private MenuItem item;
-    private int badgeCount = 0;
+    private DataBaseHelper myDB;
+    public int badgeCount = 0;
+    private String [] strings;
+
+
 
     
 
 
 
 
-    public CustomListAdapter(Context context, ArrayList arrayDesc, ArrayList arrayList, ArrayList arrauSize, ArrayList arrayPrice, ArrayList arrayPhoto, ArrayList<Boolean> array_check) {
+    public CustomListAdapter(Context context, ArrayList arrayDesc, ArrayList arrayList, ArrayList arrauSize, ArrayList arrayPrice, ArrayList arrayPhoto, ArrayList<Boolean> array_check, ArrayList<Boolean> array_radio,ArrayList<Boolean> array_check_second) {
         super(context, R.layout.mylist, arrayList);
         this.context =  context;
         this.arrayList = arrayList;
@@ -51,31 +62,28 @@ public class CustomListAdapter extends ArrayAdapter {
         this.arrayPhoto = arrayPhoto;
         this.arrayDesc = arrayDesc;
         this.array_check = array_check;
+        this.array_check_second = array_check_second;
+        this.array_radio = array_radio;
     }
 
         public View getView(final int position, View view, ViewGroup parent) {
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView=inflater.inflate(R.layout.mylist, null,true);
-        details_fragment = new Details_fragment();
+            myDB = new DataBaseHelper(getContext());
+            details_fragment = new Details_fragment();
         order_fragment = new Order_fragment();
        // Button but_details = (Button) rowView.findViewById(R.id.button8);
-        RadioGroup radioGroup = (RadioGroup) rowView.findViewById(R.id.radioGroup);
+        final RadioGroup radioGroup = (RadioGroup) rowView.findViewById(R.id.radioGroup);
             item = MainActivity_drawer.item;
         radio1 = (RadioButton) rowView.findViewById(R.id.radio1);
         radio2 = (RadioButton) rowView.findViewById(R.id.radio2);
-        radio1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (radio1.isChecked()==true){
-                    radio2.setChecked(false);
-                }else {
-                    radio2.setChecked(true);
-                }
+            if (array_radio.get(position)==false){
+                radio1.setChecked(true);
+            }else if (array_radio.get(position)==true){
+                radio2.setChecked(true);
+            }else {
+                radio1.setChecked(true);
             }
-        });
-
-
-
 
 
 
@@ -150,16 +158,45 @@ public class CustomListAdapter extends ArrayAdapter {
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if ((Boolean) array_check.get(position)==false) {
-                        badgeCount++;
-                        ActionItemBadge.update(item, badgeCount);
-                        Toast.makeText(getContext(), "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
-                        array_check.set(position,true);
-                    }else {
-                        Toast.makeText(getContext(), "Піца уже в корзині !", Toast.LENGTH_LONG).show();
+                    Cursor data = myDB.getAllData();
+                    if (array_radio.get(position) == false) {
+                        if (array_check.get(position) == false) {
+                            strings = arrauSize.get(position).split("-");
+                            AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
+                                    strings[0],strings[1]);
+                            ActionItemBadge.update(item, data.getCount());
+                            Toast.makeText(getContext(), "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                            array_check.set(position, true);
+                        }else {
+                            Toast.makeText(getContext(), "Піца уже в корзині !", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
+                    if (array_radio.get(position) == true) {
+                        if (array_check_second.get(position) == false) {
+                            strings = arrayPrice.get(position).split("-");
+                            AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
+                                    strings[0], strings[1]);
+                            ActionItemBadge.update(item, data.getCount());
+                            Toast.makeText(getContext(), "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                            array_check_second.set(position, true);
+                        }
+                        else {
+                            Toast.makeText(getContext(), "Піца уже в корзині!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }});
+
+
+
+/*
+strings = arrayPrice.get(position).split("-");
+                            AddData(String.valueOf(arrayList.get(position)),String.valueOf(arrayPhoto.get(position)),
+                                    String.valueOf(arrayPrice.get(position)),strings[1]);
+                            ActionItemBadge.update(item, data.getCount());
+                            Toast.makeText(getContext(), "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                            array_check.set(position,true);
+ */
+
         radio1.setText((String) arrauSize.get(position));
         radio2.setText((String) arrayPrice.get(position));
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
@@ -170,9 +207,46 @@ public class CustomListAdapter extends ArrayAdapter {
                 .into(imageView);
         txtDesc.setText((String) arrayDesc.get(position));
         txtTitle.setText((String) arrayList.get(position));
+
+
+            radio2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    array_radio.set(position,true);
+                }
+            });
+            radio1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    radio2.setChecked(false);
+                    array_radio.set(position,false);
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
         return rowView;
 
     }
 
 
+    public void AddData(String newEntry_1, String newEntry_2, String newEntry_3 , String newEntry_4 ) {
+
+        boolean insertData = myDB.insertData(newEntry_1,newEntry_2,newEntry_3,newEntry_4);
+
+        if(insertData==true){
+
+        }else{
+            
+        }
+    }
 }
