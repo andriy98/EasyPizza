@@ -118,6 +118,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
-
-
+    public boolean deleteData(String name,String price){
+        SQLiteDatabase db = this.getWritableDatabase();
+        long resula = db.delete(TABLE_NAME, "NAME=? AND PRICE=?",new String[]{name,price});
+        if (resula == -1){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

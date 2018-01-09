@@ -246,7 +246,7 @@ strings = arrayPrice.get(position).split("-");
         if(insertData==true){
 
         }else{
-            
+
         }
     }
 }
