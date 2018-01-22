@@ -161,6 +161,10 @@ public class CustomListAdapter extends ArrayAdapter {
                     Cursor data = myDB.getAllData();
                     if (array_radio.get(position) == false) {
                         if (array_check.get(position) == false) {
+<<<<<<< HEAD
+=======
+                            Toast.makeText(getContext(), "Radio1", Toast.LENGTH_SHORT).show();
+>>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
                             strings = arrauSize.get(position).split("-");
                             AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
                                     strings[0],strings[1]);
@@ -173,6 +177,10 @@ public class CustomListAdapter extends ArrayAdapter {
                     }
                     if (array_radio.get(position) == true) {
                         if (array_check_second.get(position) == false) {
+<<<<<<< HEAD
+=======
+                            Toast.makeText(getContext(), "Radio2", Toast.LENGTH_SHORT).show();
+>>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
                             strings = arrayPrice.get(position).split("-");
                             AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
                                     strings[0], strings[1]);
@@ -244,9 +252,15 @@ strings = arrayPrice.get(position).split("-");
         boolean insertData = myDB.insertData(newEntry_1,newEntry_2,newEntry_3,newEntry_4);
 
         if(insertData==true){
+<<<<<<< HEAD
 
         }else{
 
+=======
+            Toast.makeText(getContext(), "Data Successfully Inserted!", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getContext(), "Something went wrong :(.", Toast.LENGTH_LONG).show();
+>>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
         }
     }
 }

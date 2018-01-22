@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,10 +9,16 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+=======
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+>>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
     >
 
     <LinearLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 <RelativeLayout
@@ -145,3 +152,48 @@
 </LinearLayout>
 
 
+=======
+        android:layout_height="50pt"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="50pt"
+            android:layout_height="50pt" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="5dp"
+                android:gravity="top|center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#00164e" />
+
+            <TextView
+                android:id="@+id/size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="7dp"
+                android:gravity="center"
+                android:textColor="#007c9e" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="7dp"
+                android:gravity="center"
+                android:textColor="#007c9e" />
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+>>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
