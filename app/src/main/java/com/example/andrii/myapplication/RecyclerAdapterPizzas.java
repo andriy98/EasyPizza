@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,7 +74,7 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
                     if (array_check.get(position) == false) {
                         strings = arrauSize.get(position).split("-");
                         holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
-                                strings[0],strings[1]);
+                                strings[0].trim(),strings[1]);
                         ActionItemBadge.update(item, data.getCount());
                         Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
                         array_check.set(position, true);
@@ -85,7 +86,7 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
                     if (array_check_second.get(position) == false) {
                         strings = arrayPrice.get(position).split("-");
                         holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
-                                strings[0], strings[1]);
+                                strings[0].trim(), strings[1]);
                         ActionItemBadge.update(item, data.getCount());
                         Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
                         array_check_second.set(position, true);
@@ -129,7 +130,7 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public RadioButton radio1, radio2;
-        public CircleButton add, delete;
+        public CircleButton add;
         public MenuItem item;
         public TextView txtTitle;
         public TextView txtDesc;
@@ -144,7 +145,7 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
             radio1 = (RadioButton) v.findViewById(R.id.radio1);
             radio2 = (RadioButton) v.findViewById(R.id.radio2);
             add = (CircleButton) v.findViewById(R.id.add);
-            delete = (CircleButton) v.findViewById(R.id.delete);
+
             imageView = (ImageView) v.findViewById(R.id.imageView);
         }
         public void AddData(String newEntry_1, String newEntry_2, String newEntry_3 , String newEntry_4 ) {

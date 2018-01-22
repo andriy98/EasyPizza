@@ -47,6 +47,8 @@ public class Main_fragment extends Fragment {
     public void onStart() {
         super.onStart();
         getActivity().setTitle("Піца");
+        getPizzas();
+        progressDialog = ProgressDialog.show(getContext(),"Завантаження","Зачекайте, будь ласка...",false,false);
     }
 
     @Nullable
@@ -60,9 +62,6 @@ public class Main_fragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        getPizzas();
-        System.out.println("basta"+array_names);
-        progressDialog = ProgressDialog.show(getContext(),"Завантаження","Зачекайте, будь ласка...",false,false);
         return view;
     }
 
@@ -133,9 +132,6 @@ public class Main_fragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {}
         };
         ref.addListenerForSingleValueEvent(eventListener);
-
-
-
     }
 
 

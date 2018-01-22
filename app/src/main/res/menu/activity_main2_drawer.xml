@@ -11,6 +11,10 @@
             android:id="@+id/drinks"
             android:icon="@drawable/ic_drink"
             android:title="Напої" />
+        </group>
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/my_id">
         <item
             android:id="@+id/offers"
             android:icon="@drawable/ic_offer"
@@ -19,7 +23,8 @@
             android:id="@+id/shipping"
             android:icon="@drawable/ic_car"
             android:title="Умови доставки"/>
-    </group>
+        </group>
+
 
 
 

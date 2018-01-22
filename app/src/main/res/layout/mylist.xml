@@ -6,14 +6,17 @@
     android:layout_height="wrap_content"
     android:background="#ffff"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="visible"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    >
 
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY" />
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -80,17 +83,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_basket"
-                app:cb_color="#99CC00" />
+                app:cb_color="#759a45" />
 
-            <at.markushi.ui.CircleButton
-                android:id="@+id/delete"
-                android:layout_width="64dip"
-                android:layout_height="64dip"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/ic_delete"
-                android:visibility="invisible"
-                app:cb_color="#99CC00" />
+           />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

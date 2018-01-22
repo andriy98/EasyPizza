@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class Basket_fragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Button create_order;
 
     @Override
     public void onStart() {
@@ -41,6 +43,7 @@ public class Basket_fragment extends Fragment {
         view = inflater.inflate(LAYOUT,container,false);
        // ListView listView = (ListView) view.findViewById(R.id.listview);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycle);
+        create_order = (Button) view.findViewById(R.id.zamov);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         myDB = new DataBaseHelper(getContext());
@@ -50,6 +53,7 @@ public class Basket_fragment extends Fragment {
         arrayPhoto.clear();
         Cursor data = myDB.getAllData();
         if(data.getCount() == 0){
+            create_order.setVisibility(View.INVISIBLE);
             Toast.makeText(getContext(), "Ваша корзина порожня !",Toast.LENGTH_LONG).show();
         }else{
             while(data.moveToNext()){
