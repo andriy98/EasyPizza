@@ -16,18 +16,11 @@ import java.util.ArrayList;
 
 public class Custom_basket extends ArrayAdapter{
     private Context context;
-<<<<<<< HEAD
     private ArrayList<String> arrayName;
     private ArrayList<String> arrayPhoto;
     private ArrayList<String> arraySize;
     private ArrayList<String> arrayPrice;
     private Custom_basket adapter = this;
-=======
-    private ArrayList<String> arrayName = new ArrayList<>();
-    private ArrayList<String> arrayPhoto = new ArrayList<>();
-    private ArrayList<String> arraySize = new ArrayList<>();
-    private ArrayList<String> arrayPrice = new ArrayList<>();
->>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
 
 
     public Custom_basket(Context context, ArrayList arrayName, ArrayList arrayPhoto, ArrayList arraySize, ArrayList arrayPrice) {
@@ -41,22 +34,15 @@ public class Custom_basket extends ArrayAdapter{
 
     @NonNull
     @Override
-<<<<<<< HEAD
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-=======
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
->>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView=inflater.inflate(R.layout.mylist_basket, null,true);
         TextView name = (TextView) rowView.findViewById(R.id.item);
         TextView size = (TextView) rowView.findViewById(R.id.size);
         TextView price = (TextView) rowView.findViewById(R.id.price);
-<<<<<<< HEAD
         TextView count = (TextView) rowView.findViewById(R.id.count);
         int counts = 1;
         count.setText(counts + "шт.");
-=======
->>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
 
@@ -66,7 +52,6 @@ public class Custom_basket extends ArrayAdapter{
         name.setText(arrayName.get(position));
         size.setText(arraySize.get(position));
         price.setText(arrayPrice.get(position));
-<<<<<<< HEAD
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,8 +59,6 @@ public class Custom_basket extends ArrayAdapter{
                 adapter.notifyDataSetChanged();
             }
         });
-=======
->>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
 
 
 

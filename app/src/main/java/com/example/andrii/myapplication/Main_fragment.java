@@ -88,7 +88,6 @@ public class Main_fragment extends Fragment {
                             array_sizes.add(data.get("Розміри:"));
                             array_price.add(data.get("Ціна"));
                             array_photo.add(data.get("Фото"));
-<<<<<<< HEAD
                             Cursor cursor = myDB.getAllData();
                             if(cursor.getCount() == 0){
                                 System.out.println("No");
@@ -118,14 +117,6 @@ public class Main_fragment extends Fragment {
                             //listView.setAdapter(adapter);
                             mAdapter = new RecyclerAdapterPizzas(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_check,array_radio,array_check_second);
                             recyclerView.setAdapter(mAdapter);
-=======
-                            array_check.add(false);
-                            array_radio.add(false);
-                            array_check_second.add(false);
-                            array_names.add(name);
-                            CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_check,array_radio,array_check_second);
-                            listView.setAdapter(adapter);
->>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
                             progressDialog.dismiss();
                         }
                         @Override

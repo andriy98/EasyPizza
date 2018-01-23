@@ -7,16 +7,10 @@
     android:background="#ffff"
     android:orientation="vertical"
     android:visibility="visible"
-<<<<<<< HEAD
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     >
-=======
-    android:background="#ffff"
-    >
-
->>>>>>> eaed8754ab8c26a00865546921fe17c2d06cb1f5
 
 
     <ImageView
