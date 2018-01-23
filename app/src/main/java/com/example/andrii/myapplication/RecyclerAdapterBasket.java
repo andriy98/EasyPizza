@@ -59,11 +59,8 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
         Picasso.with(context)
                 .load(String.valueOf(arrayPhoto.get(position)))
                 .into(holder.imageView);
-        if (arrayName.get(position).length()==12) {
-            holder.name.setText("      "+arrayName.get(position));
-        }else{
-            holder.name.setText(arrayName.get(position));
-        }
+
+        holder.name.setText(arrayName.get(position));
         holder.size.setText(arraySize.get(position));
         holder.price.setText(arrayPrice.get(position));
         holder.increase.setOnClickListener(new View.OnClickListener() {
