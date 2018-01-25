@@ -37,6 +37,7 @@ public class Splash_fragment extends Fragment {
             public void run() {
                 Intent intent = new Intent(getActivity(), MainActivity_drawer.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         }, 3*1000);
 

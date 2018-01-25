@@ -1,5 +1,7 @@
 package com.example.andrii.myapplication;
 
+import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
@@ -22,14 +24,14 @@ import java.util.ArrayList;
 public class MainActivity_drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Main_fragment main_fragment;
-    private Details_fragment details_fragment;
     private Basket_fragment basket_fragment;
     private Drinks_fragment drinks_fragment;
     private Offers_fragment offers_fragment;
     private Delivery_fragment delivery_fragment;
     private Drawable icon;
     public static MenuItem item;
-    public int badgeCount=0;
+    private DataBaseHelper myDB;
+
 
 
 
@@ -37,24 +39,16 @@ public class MainActivity_drawer extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        myDB = new DataBaseHelper(getApplicationContext());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         icon = getResources().getDrawable(R.drawable.ic_basket);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         main_fragment = new Main_fragment();
-        details_fragment = new Details_fragment();
         basket_fragment = new Basket_fragment();
         drinks_fragment = new Drinks_fragment();
         offers_fragment = new Offers_fragment();
         delivery_fragment = new Delivery_fragment();
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -72,16 +66,19 @@ public class MainActivity_drawer extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            System.exit(0);
+        } else if (getSupportFragmentManager().getBackStackEntryCount()>0){
+            getSupportFragmentManager().popBackStack();
+        }else {
+           this.finish();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        Cursor data = myDB.getAllData();
         item = menu.getItem(0);
-        ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), icon,ActionItemBadge.BadgeStyles.RED, badgeCount);
+        ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), icon,ActionItemBadge.BadgeStyles.RED, data.getCount());
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -90,33 +87,18 @@ public class MainActivity_drawer extends AppCompatActivity
         try{
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_main2, basket_fragment).commit();
+            fragmentTransaction.addToBackStack(null);
         }catch (IllegalStateException e){
-            Toast.makeText(getApplicationContext(),"Da",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Помилка !",Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
 
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (id == R.id.pizza) {
@@ -129,7 +111,7 @@ public class MainActivity_drawer extends AppCompatActivity
             fragmentTransaction.replace(R.id.content_main2, delivery_fragment);
         }
         fragmentTransaction.commit();
-
+        fragmentTransaction.addToBackStack(null);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -26,6 +26,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
     private ArrayList<String> arraySize;
     private ArrayList<String> arrayPrice;
     private DataBaseHelper myDB;
+    private DBHelp_price dbHelpPrice;
     private static MenuItem item;
 
 
@@ -53,8 +54,17 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
     @Override
     public void onBindViewHolder(final RecyclerAdapterBasket.ViewHolder holder, final int position) {
         myDB = new DataBaseHelper(context);
+        dbHelpPrice = new DBHelp_price(context);
+        ArrayList<Integer> array_int = new ArrayList<>();
+        final ArrayList<String> array_newprice = new ArrayList<>();
+        Cursor data_data = dbHelpPrice.getAllData();
+        while (data_data.moveToNext()){
+            array_int.add(data_data.getInt(5));
+            array_newprice.add(data_data.getString(4));
+        }
+        holder.counts = array_int.get(position);
         final Cursor cursor = myDB.getAllData();
-        holder.counts = 1;
+        //dbHelpPrice.insertData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),arrayPrice.get(position),holder.counts);
         holder.count.setText(holder.counts + " шт.");
         Picasso.with(context)
                 .load(String.valueOf(arrayPhoto.get(position)))
@@ -62,7 +72,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
 
         holder.name.setText(arrayName.get(position));
         holder.size.setText(arraySize.get(position));
-        holder.price.setText(arrayPrice.get(position));
+        holder.price.setText(array_newprice.get(position));
         holder.increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +89,8 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
                 holder.counts++;
                 holder.count.setText(holder.counts + " шт.");
                 holder.price.setText(" "+price+" грн.");
+                boolean what = dbHelpPrice.updateData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),holder.price.getText().toString(),holder.counts);
+                System.out.println("What"+  what);
             }
         });
         holder.decrease.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +110,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
                     holder.counts--;
                     holder.count.setText(holder.counts + " шт.");
                     holder.price.setText(" " + price + " грн.");
+                    boolean what = dbHelpPrice.updateData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),holder.price.getText().toString(),holder.counts);
                 }
             }
         });
@@ -105,6 +118,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
             @Override
             public void onClick(View view) {
                 deleteData(arrayName.get(position),arrayPrice.get(position));
+                dbHelpPrice.deleteData(arrayName.get(position),arraySize.get(position));
                 arraySize.remove(position);
                 arrayPrice.remove(position);
                 arrayPhoto.remove(position);
@@ -114,6 +128,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
                 notifyItemRangeChanged(position,arrayName.size());
             }
         });
+        dbHelpPrice.close();
     }
 
     @Override
@@ -125,7 +140,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
         public TextView name, size, price, count;
         public ImageView imageView, image_delete;
         public CircleButton increase,decrease;
-        public int counts;
+        public int counts ;
 
         public ViewHolder(View v) {
             super(v);
