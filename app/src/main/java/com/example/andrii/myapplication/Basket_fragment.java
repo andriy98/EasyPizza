@@ -55,6 +55,7 @@ public class Basket_fragment extends Fragment {
         arrayPrice.clear();
         arraySize.clear();
         arrayPhoto.clear();
+        final Cursor ted = dbHelpPrice.getAllData();
         final Cursor data = myDB.getAllData();
         if(data.getCount() == 0){
             create_order.setVisibility(View.INVISIBLE);
@@ -87,7 +88,13 @@ public class Basket_fragment extends Fragment {
                // while (data.moveToNext()){
                //     System.out.println("Thursday"+data.getString(1)+data.getString(2)+data.getString(3)+data.getString(4)+data.getInt(5));
               //  }
-
+            if (ted.getCount()>0){
+                fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content_main2, order_fragment).commit();
+                fragmentTransaction.addToBackStack(null);
+            }else {
+                Toast.makeText(getContext(), "Ваша корзина порожня !",Toast.LENGTH_LONG).show();
+            }
 
                 }
         });

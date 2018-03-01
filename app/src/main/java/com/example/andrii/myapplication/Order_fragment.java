@@ -1,8 +1,11 @@
 package com.example.andrii.myapplication;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Order_fragment extends Fragment {
     private static final int LAYOUT = R.layout.order;
@@ -27,23 +32,78 @@ public class Order_fragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapter_city;
     private ArrayAdapter<String> adapter_numb;
+    private String name,size,price,count;
+    private int all_price = 0;
     private String [] sizes;
     private String [] prices;
     private String [] cities = {"Стебник", "Трускавець", "Дрогобич"};
     private String [] numbers = {"1","2","3","4","5","6","7","8","9","10"};
     private Button button_book, button_cancel;
+    private DBHelp_price dbHelpPrice;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
-        TextView textDesc = (TextView) view.findViewById(R.id.text_desc1);
+        dbHelpPrice = new DBHelp_price(getContext());
+        button_book = (Button) view.findViewById(R.id.button_book);
+        button_cancel = (Button) view.findViewById(R.id.button_cancel);
+        name="";
+        price="";
+        size="";
+        count="";
+        final Cursor data = dbHelpPrice.getAllData();
+        while (data.moveToNext()){
+            name = name + data.getString(1) + ", ";
+            price = price + data.getString(4) + ", ";
+            size = size + data.getString(3) + "; ";
+            count = count + data.getInt(5) +"; ";
+            System.out.println("Hata"+name+price+size);
+            Pattern pat=Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+            Matcher matcher=pat.matcher(data.getString(4));
+            while (matcher.find()) {
+                all_price+=Integer.parseInt(matcher.group());
+            }
+        }
+        final Spinner spinner_city = (Spinner) view.findViewById(R.id.spinner_city);
+        adapter_city = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cities);
+        adapter_city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_city.setAdapter(adapter_city);
+        final TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
+        final EditText textAddress = (EditText) view.findViewById(R.id.edit_address);
+        final EditText textPhone = (EditText) view.findViewById(R.id.edit_phone);
+        final EditText textFName = (EditText) view.findViewById(R.id.edit_name);
+        textPrice.setText(all_price+" грн.");
+        button_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((textFName.length()>1)&& (textAddress.length()>5)&&(textPhone.length()>5)&&(textPhone.length()<13)) {
+                    StartAsykcTask task = (StartAsykcTask) new StartAsykcTask(getContext(), "rtdmytryshyn@gmail.com", "Нове замовлення через додаток", "Назви:  " +
+                            name + "\nРозміри:  " + size + "\nКількості:  " + count + "\nЦіни:  " +
+                            price + "\nЗагальна ціна замовлення:  " + all_price + "\nІм’я:  " + textFName.getText() + "\nМісто:  " + spinner_city.getSelectedItem().toString() +
+                            "\nАдреса:  " + textAddress.getText() + "\nТелефон:  " + textPhone.getText()).execute();
+                    textFName.setText("");
+                    textAddress.setText("");
+                    textPhone.setText("");
+                }else {
+                    Toast.makeText(getContext(),"Заповніть всі поля правильно!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        button_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
+        /*TextView textDesc = (TextView) view.findViewById(R.id.text_desc1);
         final EditText textAddress = (EditText) view.findViewById(R.id.edit_address);
         final EditText textPhone = (EditText) view.findViewById(R.id.edit_phone);
         final EditText textFName = (EditText) view.findViewById(R.id.edit_name);
         final Spinner spinner_size = (Spinner) view.findViewById(R.id.spinner_size);
-        final Spinner spinner_city = (Spinner) view.findViewById(R.id.spinner_city);
+
         final Spinner spinner_numb = (Spinner) view.findViewById(R.id.spinner_numb);
-        final TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
+
         final TextView textName = (TextView) view.findViewById(R.id.item);
         button_book = (Button) view.findViewById(R.id.button_book);
         button_cancel = (Button) view.findViewById(R.id.button_cancel);
@@ -114,7 +174,7 @@ public class Order_fragment extends Fragment {
                     getFragmentManager().popBackStack();
                 }
             }
-        });
+        });*/
 
         return view;
     }
