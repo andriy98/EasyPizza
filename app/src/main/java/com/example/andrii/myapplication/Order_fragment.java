@@ -27,7 +27,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Order_fragment extends Fragment {
-    private static final int LAYOUT = R.layout.order;
+    @Override
+    public void onStart() {
+        super.onStart();
+        getActivity().setTitle("Оформлення");
+    }
+
+    private static final int LAYOUT = R.layout.order_new_version;
     private View view;
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapter_city;
@@ -46,7 +52,7 @@ public class Order_fragment extends Fragment {
         view = inflater.inflate(LAYOUT, container, false);
         dbHelpPrice = new DBHelp_price(getContext());
         button_book = (Button) view.findViewById(R.id.button_book);
-        button_cancel = (Button) view.findViewById(R.id.button_cancel);
+        //button_cancel = (Button) view.findViewById(R.id.button_cancel);
         name="";
         price="";
         size="";
@@ -65,13 +71,13 @@ public class Order_fragment extends Fragment {
             }
         }
         final Spinner spinner_city = (Spinner) view.findViewById(R.id.spinner_city);
-        adapter_city = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cities);
+        adapter_city = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, cities);
         adapter_city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_city.setAdapter(adapter_city);
-        final TextView textPrice = (TextView) view.findViewById(R.id.text_pr);
         final EditText textAddress = (EditText) view.findViewById(R.id.edit_address);
-        final EditText textPhone = (EditText) view.findViewById(R.id.edit_phone);
+        final EditText textPhone = (EditText) view.findViewById(R.id.edit_telephone);
         final EditText textFName = (EditText) view.findViewById(R.id.edit_name);
+        final EditText textPrice = (EditText) view.findViewById(R.id.edit_amount);
         textPrice.setText(all_price+" грн.");
         button_book.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +95,13 @@ public class Order_fragment extends Fragment {
                 }
             }
         });
-        button_cancel.setOnClickListener(new View.OnClickListener() {
+        /*button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
             }
-        });
+        });*/
         /*TextView textDesc = (TextView) view.findViewById(R.id.text_desc1);
         final EditText textAddress = (EditText) view.findViewById(R.id.edit_address);
         final EditText textPhone = (EditText) view.findViewById(R.id.edit_phone);

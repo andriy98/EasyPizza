@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Ім’я:" />
+
+
+    <EditText
+
+        android:id="@+id/edit_name"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@layout/rounded_border_edittext"
+        android:textSize="24sp"
+        android:gravity="center"
+        >
+
+        <requestFocus />
+    </EditText>
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Місто:" />
+    <Spinner
+        android:id="@+id/spinner_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@layout/rounded_border_edittext"
+        android:spinnerMode="dialog"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Адреса:" />
+
+    <EditText
+        android:id="@+id/edit_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="вул. "
+        android:gravity="center"
+        android:background="@layout/rounded_border_edittext"
+        android:textSize="24sp">
+        </EditText>
+
+    <TextView
+        android:id="@+id/telephone"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Телефон:" />
+
+    <EditText
+        android:id="@+id/edit_telephone"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:inputType="phone"
+        android:gravity="center"
+        android:background="@layout/rounded_border_edittext"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Сума замовлення:" />
+
+    <EditText
+        android:id="@+id/edit_amount"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:focusable="false"
+        android:text="150 грн."
+        android:gravity="center"
+        android:background="@layout/rounded_border_edittext"
+        android:textSize="24sp"/>
+
+    <Button
+
+        android:id="@+id/button_book"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:stateListAnimator="@animator/animator"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+
+        android:text="Підтвердити замовлення" />
+</LinearLayout>
+    </ScrollView>

@@ -29,8 +29,6 @@ public class Main_fragment extends Fragment {
     private ArrayList<String> array_descr = new ArrayList<>();
     private ArrayList<String> array_photo = new ArrayList<>();
     private ArrayList<String> array_price = new ArrayList<>();
-    private ArrayList<Boolean> array_check = new ArrayList<>();
-    private ArrayList<Boolean> array_check_second = new ArrayList<>();
     private ArrayList<Boolean> array_radio = new ArrayList<>();
     private Map<String, String> data;
     private ArrayList<String> array_sizes = new ArrayList<>();
@@ -76,8 +74,6 @@ public class Main_fragment extends Fragment {
                 array_sizes.clear();
                 array_names.clear();
                 array_price.clear();
-                array_check.clear();
-                array_check_second.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     final String name = ds.getKey();
                     myRef.child("Pizzas").child(ds.getKey()).addValueEventListener(new ValueEventListener() {
@@ -91,31 +87,15 @@ public class Main_fragment extends Fragment {
                             Cursor cursor = myDB.getAllData();
                             if(cursor.getCount() == 0){
                                 System.out.println("No");
-                                array_check.add(false);
-                                array_check_second.add(false);
                             }else{
                                 strings = data.get("Розміри:").split("-");
                                 strings_1 = data.get("Ціна").split("-");
-                                while(cursor.moveToNext()){
-                                    if ((cursor.getString(1).equals(name)==true)&&(cursor.getString(4).equals(strings[1])==true)){
-                                        array_check.add(true);
-                                        System.out.println("YES");
-                                    }else if ((cursor.getString(1).equals(name)==true)&&(cursor.getString(4).equals(strings_1[1])==true)){
-                                        array_check_second.add(true);
-                                        System.out.println("YES2");
-                                    }else {
-                                        array_check_second.add(false);
-                                        array_check.add(false);
-                                        System.out.println("NO2");
-                                    }
-                                }
                             }
                             array_radio.add(false);
                             array_names.add(name);
-                            System.out.println("atata"+array_check);
-                            CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_check,array_radio,array_check_second);
+                            //CustomListAdapter adapter = new CustomListAdapter(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_check,array_radio,array_check_second);
                             //listView.setAdapter(adapter);
-                            mAdapter = new RecyclerAdapterPizzas(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_check,array_radio,array_check_second);
+                            mAdapter = new RecyclerAdapterPizzas(getContext(),array_descr,array_names, array_sizes,array_price,array_photo,array_radio);
                             recyclerView.setAdapter(mAdapter);
                             progressDialog.dismiss();
                         }

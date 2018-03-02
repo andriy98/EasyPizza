@@ -27,22 +27,18 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
     private final ArrayList arrayPhoto;
     private final ArrayList arrayDesc;
     private final ArrayList<Boolean> array_radio;
-    private final ArrayList<Boolean> array_check;
-    private final ArrayList<Boolean> array_check_second;
     private final ArrayList arrayList;
     private MenuItem item;
     private String [] strings;
     private static DataBaseHelper myDB;
 
-    public RecyclerAdapterPizzas(Context context, ArrayList arrayDesc, ArrayList arrayList, ArrayList arrauSize, ArrayList arrayPrice, ArrayList arrayPhoto, ArrayList<Boolean> array_check, ArrayList<Boolean> array_radio, ArrayList<Boolean> array_check_second) {
+    public RecyclerAdapterPizzas(Context context, ArrayList arrayDesc, ArrayList arrayList, ArrayList arrauSize, ArrayList arrayPrice, ArrayList arrayPhoto, ArrayList<Boolean> array_radio) {
         this.context =  context;
         this.arrayList = arrayList;
         this.arrauSize = arrauSize;
         this.arrayPrice = arrayPrice;
         this.arrayPhoto = arrayPhoto;
         this.arrayDesc = arrayDesc;
-        this.array_check = array_check;
-        this.array_check_second = array_check_second;
         this.array_radio = array_radio;
     }
 
@@ -71,29 +67,46 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
             public void onClick(View view) {
                 Cursor data = myDB.getAllData();
                 if (array_radio.get(position) == false) {
-                    if (array_check.get(position) == false) {
                         strings = arrauSize.get(position).split("-");
-                        holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
-                                strings[0].trim(),strings[1]);
-                        ActionItemBadge.update(item, data.getCount());
-                        Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
-                        array_check.set(position, true);
-                    }else {
-                        Toast.makeText(context, "Піца уже в корзині !", Toast.LENGTH_SHORT).show();
-                    }
+                        if (data.getCount()==0){
+                            holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
+                                    strings[0].trim(),strings[1]);
+                            Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                        }else {
+                            while (data.moveToNext()){
+                                if ((data.getString(1)+data.getString(4)).equals(arrayList.get(position)+strings[1])){
+                                    Toast.makeText(context, "Піца уже в корзині !", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }else if (data.isLast()&&!(data.getString(1)+data.getString(4)).equals(arrayList.get(position)+strings[1])){
+                                    holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
+                                            strings[0].trim(),strings[1]);
+                                    //ActionItemBadge.update(item, data.getCount());
+                                    Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                        }
                 }
                 if (array_radio.get(position) == true) {
-                    if (array_check_second.get(position) == false) {
                         strings = arrayPrice.get(position).split("-");
-                        holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
-                                strings[0].trim(), strings[1]);
-                        ActionItemBadge.update(item, data.getCount());
-                        Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
-                        array_check_second.set(position, true);
-                    }
-                    else {
-                        Toast.makeText(context, "Піца уже в корзині!", Toast.LENGTH_SHORT).show();
-                    }
+                        if (data.getCount()==0){
+                            holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
+                                    strings[0].trim(),strings[1]);
+                            Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+
+                        }else {
+                            while (data.moveToNext()){
+                                if ((data.getString(1)+data.getString(4)).equals(arrayList.get(position)+strings[1])){
+                                    Toast.makeText(context, "Піца уже в корзині !", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }else if (data.isLast()&& !(data.getString(1)+data.getString(4)).equals(arrayList.get(position)+strings[1])){
+                                    holder.AddData(String.valueOf(arrayList.get(position)), String.valueOf(arrayPhoto.get(position)),
+                                            strings[0].trim(),strings[1]);
+                                    //ActionItemBadge.update(item, data.getCount());
+                                    Toast.makeText(context, "Піцу успішно додано в корзину !", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
                 }
             }});
 
@@ -149,11 +162,11 @@ public class RecyclerAdapterPizzas extends RecyclerView.Adapter<RecyclerAdapterP
             imageView = (ImageView) v.findViewById(R.id.imageView);
         }
         public void AddData(String newEntry_1, String newEntry_2, String newEntry_3 , String newEntry_4 ) {
-
+            Cursor data = myDB.getAllData();
             boolean insertData = myDB.insertData(newEntry_1,newEntry_2,newEntry_3,newEntry_4);
 
             if(insertData==true){
-
+                ActionItemBadge.update(item, data.getCount());
             }else{
 
             }
