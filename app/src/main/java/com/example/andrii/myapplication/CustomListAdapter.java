@@ -241,7 +241,7 @@ strings = arrayPrice.get(position).split("-");
 
     public void AddData(String newEntry_1, String newEntry_2, String newEntry_3 , String newEntry_4 ) {
 
-        boolean insertData = myDB.insertData(newEntry_1,newEntry_2,newEntry_3,newEntry_4);
+        boolean insertData = myDB.insertData(newEntry_1,newEntry_2,newEntry_3,newEntry_4,"");
 
         if(insertData==true){
 
