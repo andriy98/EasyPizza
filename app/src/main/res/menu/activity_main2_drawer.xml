@@ -10,7 +10,7 @@
         <item
             android:id="@+id/drinks"
             android:icon="@drawable/ic_drink"
-            android:title="Напої" />
+            android:title="Піцерії" />
         </group>
     <group
         android:checkableBehavior="single"

@@ -4,7 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,22 +18,17 @@ import android.widget.Toast;
 
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
 
-import java.util.ArrayList;
-
 
 public class MainActivity_drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private Main_fragment main_fragment;
     private Basket_fragment basket_fragment;
-    private Drinks_fragment drinks_fragment;
+    private Pizzerias_fragment pizzerias_fragment;
     private Offers_fragment offers_fragment;
     private Delivery_fragment delivery_fragment;
     private Drawable icon;
     public static MenuItem item;
     private DataBaseHelper myDB;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +41,7 @@ public class MainActivity_drawer extends AppCompatActivity
         setSupportActionBar(toolbar);
         main_fragment = new Main_fragment();
         basket_fragment = new Basket_fragment();
-        drinks_fragment = new Drinks_fragment();
+        pizzerias_fragment = new Pizzerias_fragment();
         offers_fragment = new Offers_fragment();
         delivery_fragment = new Delivery_fragment();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,15 +91,14 @@ public class MainActivity_drawer extends AppCompatActivity
 
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (id == R.id.pizza) {
             fragmentTransaction.replace(R.id.content_main2, main_fragment);
         } else if (id == R.id.drinks) {
-            fragmentTransaction.replace(R.id.content_main2, drinks_fragment);
+            fragmentTransaction.replace(R.id.content_main2, pizzerias_fragment);
         } else if (id == R.id.offers) {
             fragmentTransaction.replace(R.id.content_main2, offers_fragment);
         } else if (id == R.id.shipping) {

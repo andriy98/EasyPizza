@@ -40,14 +40,7 @@ public class Splash_fragment extends Fragment {
                 getActivity().finish();
             }
         }, 3*1000);
-
-
-
-
-
-
-
-        return view;
+    return view;
     }
 
 
