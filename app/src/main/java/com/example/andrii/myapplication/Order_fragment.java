@@ -23,6 +23,12 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,28 +59,36 @@ public class Order_fragment extends Fragment {
         dbHelpPrice = new DBHelp_price(getContext());
         button_book = (Button) view.findViewById(R.id.button_book);
         //button_cancel = (Button) view.findViewById(R.id.button_cancel);
-        name="";
-        price="";
-        size="";
-        count="";
+        //name="";
+        //price="";
+        //size="";
+        //count="";
+        final HashMap<String,String> emails = new HashMap<>();
+        emails.put("\"Челентано\"","rtdmytryshyn@gmail.com");
+        emails.put("\"Велика Тарілка\"","rtdmytryshyn@gmail.com");
+        emails.put("\"Фелічіта\"","sdmytryshyn67@gmail.com");
         final Cursor data = dbHelpPrice.getAllData();
+        final HashSet<String> hashSet = new HashSet<>();
         while (data.moveToNext()){
-            name = name + data.getString(1) + ", ";
-            price = price + data.getString(4) + ", ";
-            size = size + data.getString(3) + "; ";
-            count = count + data.getInt(5) +"; ";
-            System.out.println("Hata"+name+price+size);
+            hashSet.add(data.getString(6));
             Pattern pat=Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
             Matcher matcher=pat.matcher(data.getString(4));
             while (matcher.find()) {
                 all_price+=Integer.parseInt(matcher.group());
             }
+           //name = name + data.getString(1) + ", ";
+           //price = price + data.getString(4) + ", ";
+           //size = size + data.getString(3) + "; ";
+           //count = count + data.getInt(5) +"; ";
+           //Pattern pat=Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+           //Matcher matcher=pat.matcher(data.getString(4));
+           //while (matcher.find()) {
+           //    all_price+=Integer.parseInt(matcher.group());
+           //}
         }
-        final Spinner spinner_city = (Spinner) view.findViewById(R.id.spinner_city);
-        adapter_city = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, cities);
-        adapter_city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_city.setAdapter(adapter_city);
+        final String [] pizzeries = hashSet.toArray(new String[0]);
         final EditText textAddress = (EditText) view.findViewById(R.id.edit_address);
+        final EditText textCity = (EditText) view.findViewById(R.id.edit_city);
         final EditText textPhone = (EditText) view.findViewById(R.id.edit_telephone);
         final EditText textFName = (EditText) view.findViewById(R.id.edit_name);
         final EditText textPrice = (EditText) view.findViewById(R.id.edit_amount);
@@ -82,17 +96,49 @@ public class Order_fragment extends Fragment {
         button_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((textFName.length()>1)&& (textAddress.length()>5)&&(textPhone.length()>5)&&(textPhone.length()<13)) {
-                    StartAsykcTask task = (StartAsykcTask) new StartAsykcTask(getContext(), "rtdmytryshyn@gmail.com", "Нове замовлення через додаток", "Назви:  " +
-                            name + "\nРозміри:  " + size + "\nКількості:  " + count + "\nЦіни:  " +
-                            price + "\nЗагальна ціна замовлення:  " + all_price + "\nІм’я:  " + textFName.getText() + "\nМісто:  " + spinner_city.getSelectedItem().toString() +
-                            "\nАдреса:  " + textAddress.getText() + "\nТелефон:  " + textPhone.getText()).execute();
-                    textFName.setText("");
-                    textAddress.setText("");
-                    textPhone.setText("");
+                if ((textFName.length()>1)&& (textAddress.length()>5)&&(textPhone.length()>5)&&(textPhone.length()<16)) {
+                    for (int i = 0; i < hashSet.size(); i++) {
+                        name = "";
+                        price = "";
+                        size = "";
+                        count = "";
+                        Cursor second = dbHelpPrice.getAllData();
+                        while (second.moveToNext()) {
+                            if (second.getString(6).equals(pizzeries[i])) {
+                                name = name + second.getString(1) + ", ";
+                                price = price + second.getString(4) + ", ";
+                                size = size + second.getString(3) + "; ";
+                                count = count + second.getInt(5) + "; ";
+                            }
+                        }
+
+                        StartAsykcTask task = (StartAsykcTask) new StartAsykcTask(getContext(), emails.get(pizzeries[i].trim()), "Нове замовлення через додаток", "Назви:  " +
+                                name + "\nРозміри:  " + size + "\nКількості:  " + count + "\nЦіни:  " +
+                                price + "\nІм’я:  " + textFName.getText() + "\nМісто:  " + textCity.getText() +
+                                "\nАдреса:  " + textAddress.getText() + "\nТелефон:  " + textPhone.getText()).execute();
+                        if (i == (hashSet.size() - 1)) {
+                            textFName.setText("");
+                            textAddress.setText("");
+                            textPhone.setText("");
+                        }
+                    }
                 }else {
-                    Toast.makeText(getContext(),"Заповніть всі поля правильно!", Toast.LENGTH_LONG).show();
-                }
+                        Toast.makeText(getContext(),"Заповніть всі поля правильно!", Toast.LENGTH_LONG).show();
+                    }
+
+
+
+                //if ((textFName.length()>1)&& (textAddress.length()>5)&&(textPhone.length()>5)&&(textPhone.length()<13)) {
+                //    StartAsykcTask task = (StartAsykcTask) new StartAsykcTask(getContext(), "rtdmytryshyn@gmail.com", "Нове замовлення через додаток", "Назви:  " +
+                //            name + "\nРозміри:  " + size + "\nКількості:  " + count + "\nЦіни:  " +
+                //            price + "\nЗагальна ціна замовлення:  " + all_price + "\nІм’я:  " + textFName.getText() + "\nМісто:  " + spinner_city.getSelectedItem().toString() +
+                //            "\nАдреса:  " + textAddress.getText() + "\nТелефон:  " + textPhone.getText()).execute();
+                //    textFName.setText("");
+                //    textAddress.setText("");
+                //    textPhone.setText("");
+                //}else {
+                //    Toast.makeText(getContext(),"Заповніть всі поля правильно!", Toast.LENGTH_LONG).show();
+                //}
             }
         });
         /*button_cancel.setOnClickListener(new View.OnClickListener() {

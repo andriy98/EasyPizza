@@ -72,13 +72,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
 
 
-    public static final String DATABASE_NAME = "Basket.db";
-    public static final String TABLE_NAME = "basket_table";
+    public static final String DATABASE_NAME = "Datab.db";
+    public static final String TABLE_NAME = "table_b";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
     public static final String COL_3 = "PHOTO";
     public static final String COL_4 = "SIZE";
     public static final String COL_5 = "PRICE";
+    public static final String COL_6 = "PIZZERIA";
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -86,7 +87,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,PHOTO TEXT,SIZE TEXT,PRICE TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,PHOTO TEXT,SIZE TEXT,PRICE TEXT,PIZZERIA TEXT)");
     }
 
     @Override
@@ -95,13 +96,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public boolean insertData(String name,String surname,String marks,String price) {
+    public boolean insertData(String name,String surname,String marks,String price,String pizzeria) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,name);
         contentValues.put(COL_3,surname);
         contentValues.put(COL_4,marks);
         contentValues.put(COL_5,price);
+        contentValues.put(COL_6,pizzeria);
         long result = db.insert(TABLE_NAME,null ,contentValues);
         if(result == -1)
             return false;

@@ -23,6 +23,7 @@ public class Basket_fragment extends Fragment {
     private ArrayList<String> arrayPhoto = new ArrayList<>();
     private ArrayList<String> arraySize = new ArrayList<>();
     private ArrayList<String> arrayPrice = new ArrayList<>();
+    private ArrayList<String> arrayPizzeria = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -55,6 +56,7 @@ public class Basket_fragment extends Fragment {
         arrayPrice.clear();
         arraySize.clear();
         arrayPhoto.clear();
+        arrayPizzeria.clear();
         final Cursor ted = dbHelpPrice.getAllData();
         final Cursor data = myDB.getAllData();
         if(data.getCount() == 0){
@@ -62,13 +64,13 @@ public class Basket_fragment extends Fragment {
             Toast.makeText(getContext(), "Ваша корзина порожня !",Toast.LENGTH_LONG).show();
         }else{
             while(data.moveToNext()){
-                System.out.println("LABEL1"+ data.getInt(0)+data.getString(1) + data.getString(2) + data.getString(3) + data.getString(4));
                 arrayName.add(data.getString(1));
                 arrayPhoto.add(data.getString(2));
                 arraySize.add(data.getString(3));
                 arrayPrice.add(data.getString(4));
-                dbHelpPrice.insertData(data.getString(1),data.getString(2),data.getString(3),data.getString(4),1);
-                mAdapter = new RecyclerAdapterBasket(getContext(), arrayName,arrayPhoto,arraySize,arrayPrice);
+                arrayPizzeria.add(data.getString(5));
+                dbHelpPrice.insertData(data.getString(1),data.getString(2),data.getString(3),data.getString(4),1,data.getString(5));
+                mAdapter = new RecyclerAdapterBasket(getContext(), arrayName,arrayPhoto,arraySize,arrayPrice,arrayPizzeria);
                 recyclerView.setAdapter(mAdapter);
                 //Custom_basket custom_basket = new Custom_basket(getContext(), arrayName,arrayPhoto,arraySize,arrayPrice);
                 //ListAdapter listAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,theList);
@@ -95,7 +97,6 @@ public class Basket_fragment extends Fragment {
             }else {
                 Toast.makeText(getContext(), "Ваша корзина порожня !",Toast.LENGTH_LONG).show();
             }
-
                 }
         });
         return view;
