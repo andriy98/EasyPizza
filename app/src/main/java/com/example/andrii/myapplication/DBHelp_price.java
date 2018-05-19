@@ -9,21 +9,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelp_price extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "Thursday.db";
-    public static final String TABLE_NAME = "price";
+    public static final String DATABASE_NAME = "Wednesday.db";
+    public static final String TABLE_NAME = "price_new";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
     public static final String COL_3 = "PHOTO";
     public static final String COL_4 = "SIZE";
     public static final String COL_5 = "PRICE";
     public static final String COL_6 = "COUNT";
+    public static final String COL_7 = "PIZZERIA";
     public DBHelp_price(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,PHOTO TEXT,SIZE TEXT,PRICE TEXT,COUNT INTEGER)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,PHOTO TEXT,SIZE TEXT,PRICE TEXT,COUNT INTEGER,PIZZERIA)");
     }
 
     @Override
@@ -31,7 +32,7 @@ public class DBHelp_price extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
     }
-    public boolean insertData(String name, String surname, String marks, String price, Integer i) {
+    public boolean insertData(String name, String surname, String marks, String price, Integer i,String pizzeria) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,name);
@@ -39,13 +40,14 @@ public class DBHelp_price extends SQLiteOpenHelper {
         contentValues.put(COL_4,marks);
         contentValues.put(COL_5,price);
         contentValues.put(COL_6,i);
+        contentValues.put(COL_7,pizzeria);
         long result = db.insert(TABLE_NAME,null ,contentValues);
         if(result == -1)
             return false;
         else
             return true;
     }
-    public boolean updateData(String name, String surname, String marks, String price, Integer i ){
+    public boolean updateData(String name, String surname, String marks, String price, Integer i,String pizzeria ){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,name);
@@ -53,7 +55,8 @@ public class DBHelp_price extends SQLiteOpenHelper {
         contentValues.put(COL_4,marks);
         contentValues.put(COL_5,price);
         contentValues.put(COL_6,i);
-        long result = db.update(TABLE_NAME, contentValues,"NAME=? AND SIZE=?",new String[]{name,marks});
+        contentValues.put(COL_7,pizzeria);
+        long result = db.update(TABLE_NAME, contentValues,"NAME=? AND SIZE=? AND PIZZERIA=?",new String[]{name,marks,pizzeria});
         if(result == -1)
             return false;
         else
@@ -71,9 +74,9 @@ public class DBHelp_price extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
     }
-    public boolean deleteData(String name,String size){
+    public boolean deleteData(String name,String size,String pizzeria){
         SQLiteDatabase db = this.getWritableDatabase();
-        long resula = db.delete(TABLE_NAME, "NAME=? AND SIZE=?",new String[]{name,size});
+        long resula = db.delete(TABLE_NAME, "NAME=? AND SIZE=? AND PIZZERIA=?",new String[]{name,size,pizzeria});
         if (resula == -1){
             return false;
         }else {

@@ -37,13 +37,18 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:text="Місто:" />
-    <Spinner
-        android:id="@+id/spinner_city"
+
+    <EditText
+        android:id="@+id/edit_city"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_margin="5dp"
         android:background="@layout/rounded_border_edittext"
-        android:spinnerMode="dialog"
+        android:gravity="center"
+        android:text="Львів"
         android:textSize="24sp" />
 
     <TextView

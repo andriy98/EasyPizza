@@ -25,18 +25,20 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
     private ArrayList<String> arrayPhoto;
     private ArrayList<String> arraySize;
     private ArrayList<String> arrayPrice;
+    private ArrayList<String> arrayPizzeria;
     private DataBaseHelper myDB;
     private DBHelp_price dbHelpPrice;
     private static MenuItem item;
 
 
 
-    public RecyclerAdapterBasket(Context context, ArrayList arrayName, ArrayList arrayPhoto, ArrayList arraySize, ArrayList arrayPrice) {
+    public RecyclerAdapterBasket(Context context, ArrayList arrayName, ArrayList arrayPhoto, ArrayList arraySize, ArrayList arrayPrice, ArrayList arrayPizzeria) {
         this.context =  context;
         this.arrayName = arrayName;
         this.arrayPhoto = arrayPhoto;
         this.arrayPrice = arrayPrice;
         this.arraySize = arraySize;
+        this.arrayPizzeria = arrayPizzeria;
     }
 
 
@@ -55,9 +57,9 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
     public void onBindViewHolder(final RecyclerAdapterBasket.ViewHolder holder, final int position) {
         myDB = new DataBaseHelper(context);
         dbHelpPrice = new DBHelp_price(context);
-        ArrayList<Integer> array_int = new ArrayList<>();
+        final ArrayList<Integer> array_int = new ArrayList<>();
         final ArrayList<String> array_newprice = new ArrayList<>();
-        Cursor data_data = dbHelpPrice.getAllData();
+        final Cursor data_data = dbHelpPrice.getAllData();
         while (data_data.moveToNext()){
             array_int.add(data_data.getInt(5));
             array_newprice.add(data_data.getString(4));
@@ -72,6 +74,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
 
         holder.name.setText(arrayName.get(position));
         holder.size.setText(arraySize.get(position));
+        holder.pizzeria.setText(arrayPizzeria.get(position));
         holder.price.setText(array_newprice.get(position));
         holder.increase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +92,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
                 holder.counts++;
                 holder.count.setText(holder.counts + " шт.");
                 holder.price.setText(" "+price+" грн.");
-                boolean what = dbHelpPrice.updateData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),holder.price.getText().toString(),holder.counts);
-                System.out.println("What"+  what);
+                boolean what = dbHelpPrice.updateData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),holder.price.getText().toString(),holder.counts,arrayPizzeria.get(position));
             }
         });
         holder.decrease.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +112,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
                     holder.counts--;
                     holder.count.setText(holder.counts + " шт.");
                     holder.price.setText(" " + price + " грн.");
-                    boolean what = dbHelpPrice.updateData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),holder.price.getText().toString(),holder.counts);
+                    boolean what = dbHelpPrice.updateData(arrayName.get(position),arrayPhoto.get(position),arraySize.get(position),holder.price.getText().toString(),holder.counts,arrayPizzeria.get(position));
                 }
             }
         });
@@ -118,11 +120,12 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
             @Override
             public void onClick(View view) {
                 deleteData(arrayName.get(position),arrayPrice.get(position));
-                dbHelpPrice.deleteData(arrayName.get(position),arraySize.get(position));
+                dbHelpPrice.deleteData(arrayName.get(position),array_newprice.get(position),arrayPizzeria.get(position));
                 arraySize.remove(position);
                 arrayPrice.remove(position);
                 arrayPhoto.remove(position);
                 arrayName.remove(position);
+                arrayPizzeria.remove(position);
                 ActionItemBadge.update(item,cursor.getCount());
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position,arrayName.size());
@@ -137,7 +140,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, size, price, count;
+        public TextView name, size, price, count, pizzeria;
         public ImageView imageView, image_delete;
         public CircleButton increase,decrease;
         public int counts ;
@@ -145,6 +148,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.item);
+            pizzeria = (TextView) v.findViewById(R.id.pizzeria);
             item = MainActivity_drawer.item;
             price = (TextView) v.findViewById(R.id.price);
             size = (TextView) v.findViewById(R.id.size);
@@ -153,10 +157,7 @@ public class RecyclerAdapterBasket extends RecyclerView.Adapter<RecyclerAdapterB
             image_delete = (ImageView) v.findViewById(R.id.delete);
             increase  = (CircleButton) v.findViewById(R.id.inc);
             decrease  = (CircleButton) v.findViewById(R.id.dec);
-
         }
-
-
     }
     public void deleteData(String name, String price){
         boolean removeData = myDB.deleteData(name,price);
