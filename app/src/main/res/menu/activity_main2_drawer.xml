@@ -17,12 +17,12 @@
         android:id="@+id/my_id">
         <item
             android:id="@+id/offers"
-            android:icon="@drawable/ic_offer"
-            android:title="Акції" />
+            android:icon="@drawable/ic_feedback_black_24dp"
+            android:title="Зворотній зв’зок" />
         <item
             android:id="@+id/shipping"
-            android:icon="@drawable/ic_car"
-            android:title="Умови доставки"/>
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="Вихід"/>
         </group>
 
 
